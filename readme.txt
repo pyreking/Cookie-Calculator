@@ -12,7 +12,9 @@ Refund Amount: Calculates the refund value of x buildings, factoring in the tota
 
 Cookies Needed: Given a target number of buildings to reach, this displays the amount of cookies that must be obtained in order to reach your "target" value. Factors in the current number of cookies banked.
 
-In order to run this program:
+Running this program:
 
 1. run java -jar "Cookie Calculator.jar" from the command line.
 3. Right click the file and open it with Java 7 Runtime.
+
+You may contact me via email (austin.guiney@gmail.com) or via tumblr (aguiney).
