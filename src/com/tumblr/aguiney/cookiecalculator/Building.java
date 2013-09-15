@@ -9,13 +9,15 @@ public enum Building {
 	SHIPMENT(40000, 100),
 	ALCHEMY_LAB(200000, 400),
 	PORTAL(1666666, 6666),
-	TIME_MACHINE(123456789, 98765);
+	TIME_MACHINE(123456789, 98765),
+	// Full name stretches the combo box.
+	CONDENSER(3999999999L, 999999);
 	
 	private final double baseCost;
 	// Singleton. I may incorporate cps functions in future updates.
 	private final double baseCPS;
 	
-	Building(int baseCost, double baseCPS) {
+	Building(double baseCost, double baseCPS) {
 		this.baseCost = baseCost;
 		this.baseCPS = baseCPS;
 	}
