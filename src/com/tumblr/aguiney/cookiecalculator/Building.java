@@ -3,7 +3,7 @@ package com.tumblr.aguiney.cookiecalculator;
 public enum Building {
 	CURSOR(15, 0.1),
 	GRANDMA(100, 0.5),
-	FARM(500, 2),
+	FARM(500, 4),
 	FACTORY(3000, 10),
 	MINE(10000, 40),
 	SHIPMENT(40000, 100),
@@ -11,7 +11,8 @@ public enum Building {
 	PORTAL(1666666, 6666),
 	TIME_MACHINE(123456789, 98765),
 	// Full name stretches the combo box.
-	CONDENSER(3999999999L, 999999);
+	CONDENSER(3999999999L, 999999),
+	PRISM(49005000000L, 10000000);
 	
 	private final double baseCost;
 	// Singleton. I may incorporate cps functions in future updates.
