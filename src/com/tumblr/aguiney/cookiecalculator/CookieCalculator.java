@@ -11,9 +11,13 @@ public class CookieCalculator extends JFrame implements ActionListener {
 	JTextField[] fields = new JTextField[8];
 	JButton calculateButton = new JButton("Calculate");
 	JButton clearButton = new JButton("Clear");
+	JCheckBox workshopBox = new JCheckBox("Toy workshop");
+	JCheckBox dominionBox = new JCheckBox("Santa's Dominion");
+	JCheckBox eggBox = new JCheckBox("Faberge egg");
 	String currentText;
 	int buildings = 0;
 	long cookies = 0L;
+	float currentMultiplier;
 	
 	public CookieCalculator() {
 		super("Cookie Calculator");
@@ -38,13 +42,24 @@ public class CookieCalculator extends JFrame implements ActionListener {
 		buildingList = new JComboBox<Building>(Building.values());
 		
 		JPanel container = new JPanel(new BorderLayout());
-		JPanel comboPanel = new JPanel();
+		JPanel comboPanel = new JPanel(new BorderLayout());
 		JPanel buttonPanel = new JPanel();
+		JPanel checkPanel = new JPanel();
+		
 		JPanel fieldPanel = new JPanel(new GridLayout(4, 2, 20, 20));
+		
+		
+		workshopBox.addActionListener(this);
+		dominionBox.addActionListener(this);
+		eggBox.addActionListener(this);
+		checkPanel.add(workshopBox);
+		checkPanel.add(dominionBox);
+		checkPanel.add(eggBox);
 		
 		buildingList.setSelectedIndex(0);
 		buildingList.addActionListener(this);
-		comboPanel.add(buildingList);
+		comboPanel.add(buildingList, BorderLayout.NORTH);
+		comboPanel.add(checkPanel, BorderLayout.SOUTH);
 		
 		calculateButton.addActionListener(this);
 		clearButton.addActionListener(this);
@@ -71,22 +86,50 @@ public class CookieCalculator extends JFrame implements ActionListener {
 		add(container);
 		setSize(650, 300);
 	}
+	
+	public void evaluateCheckBox() {
+		if (workshopBox.isSelected()) {
+			current.setMultiplier(0.95);
+		} else if (dominionBox.isSelected()) {
+			current.setMultiplier(0.98);
+		} else if (eggBox.isSelected()) {
+			current.setMultiplier(0.99);
+		} else {
+			current.setMultiplier(1.0);
+		}
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buildingList) {
 			current = (Building) buildingList.getSelectedItem();
 		}
 		
+		if (e.getSource() == workshopBox) {
+			dominionBox.setSelected(false);
+			eggBox.setSelected(false);
+		}
+		
+		if (e.getSource() == dominionBox) {
+			workshopBox.setSelected(false);
+			eggBox.setSelected(false);
+		}
+		
+		if (e.getSource() == eggBox) {
+			workshopBox.setSelected(false);
+			dominionBox.setSelected(false);
+		}
+		
 		if (e.getSource() == calculateButton ||
 				e.getSource() instanceof JTextField) {
 			try {
+				evaluateCheckBox();
 				displayCost();
 				displayQuantity();
 				displayRefund();
 				displayCookiesNeeded();
 			} catch (NumberFormatException nfe) {
-				JOptionPane.showMessageDialog(this, "Error: "
-						+ "Invalid number(s)!");
+				JOptionPane.showMessageDialog(this, nfe.getMessage().
+						substring(18) + " is not a valid number.");
 			}
 		}
 		
@@ -117,8 +160,7 @@ public class CookieCalculator extends JFrame implements ActionListener {
 			fields[3].setText(currentText);
 		} else {
 			fields[2].setText("0");
-			// Displays the base price of the building.
-			fields[3].setText(String.valueOf(current.getBaseCost()));
+			displayCost();
 		}
 	}
 	
@@ -158,6 +200,9 @@ public class CookieCalculator extends JFrame implements ActionListener {
 		for (int i = 0; i < fields.length; i++) {
 			fields[i].setText("");
 		}
+		workshopBox.setSelected(false);
+		dominionBox.setSelected(false);
+		eggBox.setSelected(false);
 	}
 	
 	public static void main(String[] args) {

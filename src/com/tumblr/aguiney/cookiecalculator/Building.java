@@ -10,13 +10,13 @@ public enum Building {
 	ALCHEMY_LAB(200000, 400),
 	PORTAL(1666666, 6666),
 	TIME_MACHINE(123456789, 98765),
-	// Full name stretches the combo box.
-	CONDENSER(3999999999L, 999999),
-	PRISM(49005000000L, 10000000);
+	ANTIMATTER_CONDENSER(3999999999L, 999999),
+	PRISM(75000000000L, 10000000);
 	
 	private final double baseCost;
 	// Singleton. I may incorporate cps functions in future updates.
 	private final double baseCPS;
+	private double multiplier = 1;
 	
 	Building(double baseCost, double baseCPS) {
 		this.baseCost = baseCost;
@@ -26,13 +26,14 @@ public enum Building {
 	// Returns the current price of the building.
 	public double price(int buildingsOwned) {
 		if (buildingsOwned < 0) return 0.0;
-		double price = baseCost * Math.pow(1.15, buildingsOwned);
+		double price = (baseCost * multiplier) * Math.pow(1.15, buildingsOwned);
 		return Math.round(price);
 	}
 	
 	// Returns the cumulative price of "target" buildings.
 	public double cumulativePrice(int target) {
-		double price = baseCost * (Math.pow(1.15, target) - 1) / 0.15;
+		double price = (baseCost * multiplier)
+				* (Math.pow(1.15, target) - 1) / 0.15;
 		return Math.round(price);
 	}
 	
@@ -67,5 +68,13 @@ public enum Building {
 	
 	public double getBaseCPS() {
 		return baseCPS;
+	}
+	
+	public double getMultiplier() {
+		return multiplier;
+	}
+	
+	public void setMultiplier(double newMultiplier) {
+		multiplier = newMultiplier;
 	}
 }
