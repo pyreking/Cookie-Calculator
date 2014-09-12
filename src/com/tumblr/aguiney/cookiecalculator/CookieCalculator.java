@@ -45,13 +45,12 @@ public class CookieCalculator extends JFrame implements ActionListener {
 		JPanel comboPanel = new JPanel(new BorderLayout());
 		JPanel buttonPanel = new JPanel();
 		JPanel checkPanel = new JPanel();
-		
 		JPanel fieldPanel = new JPanel(new GridLayout(4, 2, 20, 20));
-		
 		
 		workshopBox.addActionListener(this);
 		dominionBox.addActionListener(this);
 		eggBox.addActionListener(this);
+		
 		checkPanel.add(workshopBox);
 		checkPanel.add(dominionBox);
 		checkPanel.add(eggBox);
@@ -87,6 +86,7 @@ public class CookieCalculator extends JFrame implements ActionListener {
 		setSize(650, 300);
 	}
 	
+	// Changes the multiplier for current based on what check box is selected.
 	public void evaluateCheckBox() {
 		if (workshopBox.isSelected()) {
 			current.setMultiplier(0.95);
@@ -104,6 +104,7 @@ public class CookieCalculator extends JFrame implements ActionListener {
 			current = (Building) buildingList.getSelectedItem();
 		}
 		
+		// Deselects any check box this already selected.
 		if (e.getSource() == workshopBox) {
 			dominionBox.setSelected(false);
 			eggBox.setSelected(false);
@@ -160,6 +161,7 @@ public class CookieCalculator extends JFrame implements ActionListener {
 			fields[3].setText(currentText);
 		} else {
 			fields[2].setText("0");
+			// Calls itself so that it has a meaningful value to display.
 			displayCost();
 		}
 	}

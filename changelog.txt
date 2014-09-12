@@ -1,0 +1,16 @@
+* Antimatter Condensers now displays as the full name.
+
+* Modified Building.java to add in a multiplier (default 1.0x) for price() and cumulativePrice().
+
+* Modified CookieCalculator.java to add check boxes for the "Toy workshop," "Santa's dominion," and "Faberge egg" upgrades.
+
+* Only one check box may be selected at a time.
+
+* Each check box changes the cost multiplier for the current bulding. 0.95x, 0.98x, and 
+0.99x respectively. This is handled by evaluateCheckBox();
+
+* displayCost() now calls itself when there is no user-inserted Building data.
+
+* comboPanel now uses BorderLayout() as its Layout Manager.
+
+* clearFields() now clears any JCheckBox this has been selected.

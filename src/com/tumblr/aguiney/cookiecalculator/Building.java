@@ -16,7 +16,7 @@ public enum Building {
 	private final double baseCost;
 	// Singleton. I may incorporate cps functions in future updates.
 	private final double baseCPS;
-	private double multiplier = 1;
+	private double multiplier = 1.0;
 	
 	Building(double baseCost, double baseCPS) {
 		this.baseCost = baseCost;
